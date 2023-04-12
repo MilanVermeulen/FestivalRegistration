@@ -34,5 +34,5 @@ pipelines:
                     image: inventis/composer:8.2-alpine
                     deployment: production
                     script:
-                        - mkdir -p ./var/mage-logs
-                        - (composer deploy production && cat ./var/mage-logs/*) || (cat ./var/mage-logs/* && exit 1)
+                        - mkdir -p ./var/Mage-logs
+                        - (composer deploy production && cat ./var/Mage-logs/*) || (cat ./var/Mage-logs/* && exit 1)

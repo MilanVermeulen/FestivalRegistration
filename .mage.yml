@@ -29,7 +29,7 @@ magephp:
         - ./.editorconfig
         - ./.idea
         - ./.gitignore
-        - ./.mage.yml
+        - ./.Mage.yml
         - ./.php-version.yml
         - ./symfony.lock
         - ./package.json
@@ -47,7 +47,7 @@ magephp:
         - ./vendor/**/*.md
         - ./vendor/**/LICENSE
         - ./tests
-    log_dir: ./var/mage-logs
+    log_dir: ./var/Mage-logs
     environments:
         production:
             <<: *environment-defaults
