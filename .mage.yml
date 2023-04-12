@@ -60,9 +60,9 @@ magephp:
                 -   fs/link: { from: '../../../shared/public/upload', to: 'public/upload' }
                 -   fs/link: { from: '../../shared/.env', to: '.env' }
                 -   fs/link: { from: '../../../shared/public/cache', to: 'public/cache' }
-                -   fs/link: { from: '../../../shared/var/upload', to: 'var/upload' }
-                #-   symfony/cache-warmup: { flags: '--no-debug' }
-                #-   console: { command: 'doctrine:migrations:migrate --allow-no-migration --no-interaction' }
+                -   fs/link: { from: '../../../shared/var/uploads', to: 'var/uploads' }
+                -   symfony/cache-warmup: { flags: '--no-debug' }
+                -   console: { command: 'doctrine:migrations:migrate --allow-no-migration --no-interaction' }
             post-release:
                 -   exec: *opcache-reset-production
 
