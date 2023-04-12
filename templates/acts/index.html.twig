@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acts index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2 class="text-center mt-5 mb-3">Acts</h2>
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-primary" href="{{ path('app_acts_new') }}">
+                Create New act
+            </a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Stage</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for act in acts %}
+                    <tr>
+                        <td>{{ act.name }}</td>
+                        <td>{{ act.stage }}</td>
+                        <td>{{ act.date ? act.date|format_datetime}}</td>
+                        <td>{{ act.description }}</td>
+                        <td>
+                            <a href="{{ path('app_acts_show', {'id': act.id}) }}">show</a>
+                            <a href="{{ path('app_acts_edit', {'id': act.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}

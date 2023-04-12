@@ -30,16 +30,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $adres = null;
+    private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $postcode = null;
+    private ?string $zipcode = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $stad = null;
+    private ?string $city = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $naam = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
@@ -111,50 +111,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAdres(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adres;
+        return $this->address;
     }
 
-    public function setAdres(string $adres): self
+    public function setAddress(string $address): self
     {
-        $this->adres = $adres;
+        $this->address = $address;
 
         return $this;
     }
 
-    public function getPostcode(): ?string
+    public function getZipcode(): ?string
     {
-        return $this->postcode;
+        return $this->zipcode;
     }
 
-    public function setPostcode(string $postcode): self
+    public function setZipcode(string $zipcode): self
     {
-        $this->postcode = $postcode;
+        $this->zipcode = $zipcode;
 
         return $this;
     }
 
-    public function getStad(): ?string
+    public function getCity(): ?string
     {
-        return $this->stad;
+        return $this->city;
     }
 
-    public function setStad(string $stad): self
+    public function setCity(string $city): self
     {
-        $this->stad = $stad;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getNaam(): ?string
+    public function getName(): ?string
     {
-        return $this->naam;
+        return $this->name;
     }
 
-    public function setNaam(string $naam): self
+    public function setName(string $name): self
     {
-        $this->naam = $naam;
+        $this->name = $name;
 
         return $this;
     }
