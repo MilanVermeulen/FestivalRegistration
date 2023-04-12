@@ -29,6 +29,9 @@ class Acts
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageFileName = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,5 +95,21 @@ class Acts
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageFileName(): ?string
+    {
+        return  $this->imageFileName;
+    }
+
+    /**
+     * @param string|null $imageFileName
+     */
+    public function setImageFileName(?string $imageFileName): void
+    {
+        $this->imageFileName = $imageFileName;
     }
 }

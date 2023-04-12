@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Acts;
 use App\Form\ActsType;
+use App\Service\FileUploader;
 use App\Repository\ActsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/acts')]
 class ActsController extends AbstractController
 {
+    private FileUploader $fileUploader;
+
+    public function __construct(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
     #[Route('/', name: 'app_acts_index', methods: ['GET'])]
     public function index(ActsRepository $actsRepository): Response
     {
@@ -25,11 +33,24 @@ class ActsController extends AbstractController
     #[Route('/new', name: 'app_acts_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ActsRepository $actsRepository): Response
     {
+        $renderTemplate = 'acts/new.html.twig';
         $act = new Acts();
         $form = $this->createForm(ActsType::class, $act);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                try {
+                    $imageFileName = $this->fileUploader->upload($imageFile);
+                    $act->setImageFileName($imageFileName);
+                } catch (FileException $e) {
+                    return $this->render($renderTemplate, [
+                        'error' => 'An error occurred while uploading your image: ' . $e->getMessage()
+                    ]);
+                }
+            }
+
             $actsRepository->save($act, true);
 
             return $this->redirectToRoute('app_acts_index', [], Response::HTTP_SEE_OTHER);
@@ -40,7 +61,6 @@ class ActsController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/{id}', name: 'app_acts_show', methods: ['GET'])]
     public function show(Acts $act): Response
     {
@@ -50,12 +70,26 @@ class ActsController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_acts_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Acts $act, ActsRepository $actsRepository): Response
+    public function edit(Request $request, Acts $act, ActsRepository $actsRepository, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(ActsType::class, $act);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFile = $form->get('image')->getData();
+            if ($uploadedFile) {
+                try {
+                    $newFilename = $fileUploader->upload($uploadedFile, $request);
+                    $act->setImageFileName($newFilename);
+                } catch (FileException $e) {
+                    return $this->render('acts/edit.html.twig', [
+                        'act' => $act,
+                        'form' => $form,
+                        'error' => 'An error occurred while uploading your image: ' . $e->getMessage()
+                    ]);
+                }
+            }
+
             $actsRepository->save($act, true);
 
             return $this->redirectToRoute('app_acts_index', [], Response::HTTP_SEE_OTHER);
@@ -76,4 +110,6 @@ class ActsController extends AbstractController
 
         return $this->redirectToRoute('app_acts_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }
