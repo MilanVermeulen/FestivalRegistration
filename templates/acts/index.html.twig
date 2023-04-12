@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{ act.name }}</td>
                         <td>{{ act.stage }}</td>
-                        <td>{{ act.date ? act.date|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ act.date ? act.date|format_datetime}}</td>
                         <td>{{ act.description }}</td>
                         <td>
                             <a href="{{ path('app_acts_show', {'id': act.id}) }}">show</a>
@@ -36,7 +36,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="7">no records found</td>
+                        <td colspan="5">no records found</td>
                     </tr>
                 {% endfor %}
                 </tbody>
