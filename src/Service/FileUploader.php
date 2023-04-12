@@ -2,12 +2,14 @@
 
 namespace App\Service;
 
+use App\Entity\Acts;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class FileUploader
 {
+
     private string $actsPath;
 
     public function __construct(string $actsPath)
@@ -26,6 +28,9 @@ class FileUploader
             // Handle file upload error
             throw new FileException('Error uploading file: ' . $e->getMessage());
         }
+        // Save the new file name to the database
+        $actsEntity = new Acts();
+        $actsEntity->setImageFileName($newFilename);
 
         return $newFilename;
     }
@@ -34,5 +39,6 @@ class FileUploader
     {
         return $this->actsPath;
     }
+
 }
 

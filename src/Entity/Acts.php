@@ -102,7 +102,7 @@ class Acts
      */
     public function getImageFileName(): ?string
     {
-        return  $this->imageFileName;
+        return $this->imageFileName;
     }
 
     /**

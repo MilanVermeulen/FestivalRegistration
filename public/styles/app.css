@@ -19,7 +19,8 @@
         border-top-right-radius: .3rem;
         border-bottom-right-radius: .3rem;
     }
-    .img {
-        width: 150px;
+    img {
+        height: 50px;
+        width: 50px;
     }
 }

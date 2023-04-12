@@ -17,7 +17,11 @@
             <b class="text-muted">Description:</b>
             <p>{{ act.description }}</p>
             <b class="text-muted">Image:</b>
-            <img src="{{ act.imageFileName}}"><br>
+        {% if act.imageFileName is not null %}
+            <img src="{{ asset('uploads/acts/' ~ act.imageFileName) }}" alt="{{ act.name }}" />
+        {% else %}
+             <p>No image available</p>
+        {% endif %}<br>
             <b class="text-muted">date and time:</b>
             <p>{{ act.date ? act.date|date('Y-m-d H:i:s') : '' }}</p>
             {{ include('acts/_delete_form.html.twig') }}
