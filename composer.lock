@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4dfe5c5ca7b915545782c271c7fdb9b4",
+    "content-hash": "7bd5da1c0978f0db233f76262074022d",
     "packages": [
         {
             "name": "andres-montanez/magallanes",
