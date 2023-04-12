@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center allign-items-center">
+            <div class="col-sm-3">
+                <h1>Register</h1>
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{form_row(registrationForm.name, {
+                    label: 'Name'
+                })}}
+                {{form_row(registrationForm.address, {
+                    label: 'Address'
+                })}}
+                {{form_row(registrationForm.zipcode, {
+                    label: 'Zipcode'
+                })}}
+                {{form_row(registrationForm.city, {
+                    label: 'city    '
+                })}}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                <button type="submit" class="btn btn-primary">Register</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+version: '3.6'
+
+services:
+    database:
+        image: inventis/mysql:8.2
+        ports:
+            - '3306:3306'
+        volumes:
+            - ./docker/containerstate/mysql:/var/lib/mysql:cached
+        environment:
+            MYSQL_DATABASE: DB_stage
+            MYSQL_ROOT_PASSWORD: root
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode=""
+
+    mailer:
+        image: mailhog/mailhog
+        ports:
+            - '8025:8025'
+            - '1025:1025'
+        command:
+            # https://github.com/mailhog/MailHog/blob/master/docs/JIM.md
+            - -jim-accept=0
