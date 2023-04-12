@@ -15,6 +15,7 @@ class ActsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Build the form
         $builder
             ->add('name', TextType::class, [
                 'required' => true,

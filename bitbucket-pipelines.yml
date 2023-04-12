@@ -1,0 +1,38 @@
+options:
+    max-time: 10
+
+definitions:
+    steps:
+        -   step: &composer
+                name: Composer & Security Check
+                image: inventis/composer:8.2-alpine
+                script:
+                    -  cp .env.dist .env
+                    - composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader
+                artifacts:
+                    - vendor/**
+
+        -   step: &build-assets
+                image: inventis/node:16-alpine
+                name: Build assets
+                script:
+                    - yarn install
+                    - yarn run prod
+                artifacts:
+                    - public/assets/**
+
+    caches:
+        vendor: vendor
+
+pipelines:
+    branches:
+        Main:
+            -   step: *composer
+            #-   step: *build-assets
+            -   step:
+                    name: Deploy (Production)
+                    image: inventis/composer:8.2-alpine
+                    deployment: production
+                    script:
+                        - mkdir -p ./var/mage-logs
+                        - (composer deploy production && cat ./var/mage-logs/*) || (cat ./var/mage-logs/* && exit 1)

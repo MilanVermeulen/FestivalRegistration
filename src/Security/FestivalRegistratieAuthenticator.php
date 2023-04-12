@@ -27,10 +27,11 @@ class FestivalRegistratieAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
+        // Get the email from the request
         $email = $request->request->get('email', '');
-
+        // Set the email as the last username
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-
+        // Return the passport
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
@@ -42,15 +43,17 @@ class FestivalRegistratieAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        // If the user has a target path, redirect to that path
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
+        // Otherwise redirect to the acts index
         return new RedirectResponse($this->urlGenerator->generate('app_acts_index'));
     }
 
     protected function getLoginUrl(Request $request): string
     {
+        // Redirect to the login route
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }

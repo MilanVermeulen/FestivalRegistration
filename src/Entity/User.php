@@ -140,7 +140,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->city;
     }
 
-    public function setStad(string $city): self
+    public function setCity(string $city): self
     {
         $this->city = $city;
 
@@ -152,7 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setNaam(string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 

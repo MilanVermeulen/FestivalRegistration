@@ -19,9 +19,10 @@ class FileUploader
 
     public function upload(UploadedFile $file): string
     {
+        // Generate a unique name for the file before saving it
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $newFilename = $originalFilename . '.' . uniqid() . '.' . $file->guessExtension();
-
+        // Move the file to the directory where images are stored
         try {
             $file->move($this->getTargetDirectory(), $newFilename);
         } catch (FileException $e) {
