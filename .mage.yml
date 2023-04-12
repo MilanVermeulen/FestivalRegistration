@@ -2,7 +2,7 @@
 .create_directories: &create-directories
     desc: Create directories
     cmd: '
-    ([ -d ../../shared/public/uploads/acts ] || mkdir -p ../../shared/public/uploads)
+    ([ -d ../../shared/public/uploads/acts ] || mkdir -p ../../shared/public/uploads)'
 
 .opcache_reset: &opcache-reset-production
     desc: Clearing opcache
