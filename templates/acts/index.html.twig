@@ -18,7 +18,6 @@
                         <th>Name</th>
                         <th>Stage</th>
                         <th>Date</th>
-                        <th>Image</th>
                         <th>Description</th>
                         <th>actions</th>
                     </tr>
@@ -29,7 +28,6 @@
                         <td>{{ act.name }}</td>
                         <td>{{ act.stage }}</td>
                         <td>{{ act.date ? act.date|date('Y-m-d H:i:s') : '' }}</td>
-                        <td>{{ act.image }}</td>
                         <td>{{ act.description }}</td>
                         <td>
                             <a href="{{ path('app_acts_show', {'id': act.id}) }}">show</a>
