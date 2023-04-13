@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ActsType extends AbstractType
 {
@@ -19,6 +20,11 @@ class ActsType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a name',
+                    ]),
+                ],
             ])
             ->add('stage' , ChoiceType::class, [
                 'choices' => [
@@ -26,8 +32,21 @@ class ActsType extends AbstractType
                     'Boiler Room' => 'Boiler Room',
                     'Marquee' => 'Marquee',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please select a stage',
+                    ]),
+                ],
             ])
-            ->add('date')
+            ->add('date', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a date',
+                    ]),
+                ],
+            ])
+
             ->add('image', FileType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -43,7 +62,11 @@ class ActsType extends AbstractType
                 ],
             ])
             ->add('description', TextType::class, [
-                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a description',
+                    ]),
+                ],
             ])
         ;
     }

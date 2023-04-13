@@ -21,25 +21,50 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'email',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter an email',
+                    ]),
+                ],
             ])
             ->add('name', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Name',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a name',
+                    ]),
                 ],
             ])
             ->add('address', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Address',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter an address',
+                    ]),
+                ],
             ])
             ->add('city', TextType::class, [
                 'attr' => [
                     'placeholder' => 'City',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a city',
+                    ]),
+                ],
             ])
             ->add('zipcode', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Zipcode',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a zipcode',
+                    ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
