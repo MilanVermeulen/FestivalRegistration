@@ -19,7 +19,6 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class, [
-                'field_type' => 'email',
                 'attr' => [
                     'placeholder' => 'email',
                 ],
@@ -28,8 +27,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter an email',
                     ]),
                     new Email([
-                        'message' => 'Please enter a valid email',
-                    ])
+                        'message' => 'Please enter a valid email address',
+                    ]),
                 ],
             ])
             ->add('name', TextType::class, [
