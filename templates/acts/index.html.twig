@@ -52,7 +52,7 @@
             <div class="dropdown">
                 <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdown-language" role="button"
                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    English
+                    {{ app.request.locale|locale_name(app.request.locale) }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-language">
                     <li><a class="dropdown-item" href="{{ path('app_acts_index', {_locale: 'en'}) }}">English</a></li>
