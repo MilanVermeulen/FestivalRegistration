@@ -23,6 +23,25 @@ class Acts
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $time = null;
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $time
+     */
+    public function setTime(?\DateTimeInterface $time): void
+    {
+        $this->time = $time;
+    }
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
@@ -97,4 +116,6 @@ class Acts
     {
         $this->imageFileName = $imageFileName;
     }
+
+
 }

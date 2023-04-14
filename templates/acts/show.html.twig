@@ -20,7 +20,7 @@
         {% if act.imageFileName is not null %}
             <img src="{{ asset('uploads/acts/' ~ act.imageFileName) }}" />
         {% else %}
-             <p>{{ no image available|trans }}</p>
+             <p>{{ 'no image available'|trans }}</p>
         {% endif %}<br>
             <b class="text-muted">{{ 'date and time:'|trans }}</b>
             <p>{{ act.date ? act.date|date('Y-m-d H:i:s') : '' }}</p>

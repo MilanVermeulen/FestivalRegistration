@@ -6,8 +6,10 @@ use App\Entity\Acts;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -38,12 +40,26 @@ class ActsType extends AbstractType
                         'message' => 'Please select a stage',
                     ]),
                 ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ])
-            ->add('date', DateTimeType::class, [
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a date',
+                    ]),
+                ],
+            ])
+            ->add('time', TimeType::class, [
+                'help' => 'Format: HH:MM',
+                'widget' => 'single_text',
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a time',
                     ]),
                 ],
             ])
