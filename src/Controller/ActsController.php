@@ -21,7 +21,14 @@ class ActsController extends AbstractController
         $this->fileUploader = $fileUploader;
     }
 
-    #[Route('/', name: 'app_acts_index', methods: ['GET'])]
+    #[Route('/')]
+    public function indexNoLocale(): Response
+    {
+        return $this->redirectToRoute('app_acts_index', ['_locale' => 'en']);
+    }
+
+
+    #[Route('/{_locale<%app.supported_locales%>}/', name: 'app_acts_index', methods: ['GET'])]
     public function index(ActsRepository $actsRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -30,7 +37,7 @@ class ActsController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_acts_new', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<%app.supported_locales%>}/new', name: 'app_acts_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ActsRepository $actsRepository): Response
     {
         $renderTemplate = 'acts/new.html.twig';
@@ -61,7 +68,7 @@ class ActsController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{id}', name: 'app_acts_show', methods: ['GET'])]
+    #[Route('/{_locale<%app.supported_locales%>}/{id}', name: 'app_acts_show', methods: ['GET'])]
     public function show(Acts $act): Response
     {
         return $this->render('acts/show.html.twig', [
@@ -69,7 +76,7 @@ class ActsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_acts_edit', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<%app.supported_locales%>}/{id}/edit', name: 'app_acts_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Acts $act, ActsRepository $actsRepository, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(ActsType::class, $act);
@@ -101,7 +108,7 @@ class ActsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_acts_delete', methods: ['POST'])]
+    #[Route('/{_locale<%app.supported_locales%>}/{id}', name: 'app_acts_delete', methods: ['POST'])]
     public function delete(Request $request, Acts $act, ActsRepository $actsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$act->getId(), $request->request->get('_token'))) {
