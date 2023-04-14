@@ -7,11 +7,12 @@ use App\Form\ActsType;
 use App\Service\FileUploader;
 use App\Repository\ActsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/acts')]
+#[Route('/{_locale<%app.supported_locales%>}/acts')]
 class ActsController extends AbstractController
 {
     private FileUploader $fileUploader;
@@ -20,6 +21,14 @@ class ActsController extends AbstractController
     {
         $this->fileUploader = $fileUploader;
     }
+
+    #[Route('/')]
+    /*public function indexNoLocale(): Response
+    {
+        return $this->redirectToRoute('app_acts_index', ['_locale' => 'en']);
+    }
+    */
+
 
     #[Route('/', name: 'app_acts_index', methods: ['GET'])]
     public function index(ActsRepository $actsRepository): Response

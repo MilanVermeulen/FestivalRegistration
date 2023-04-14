@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -21,25 +22,53 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'email',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter an email',
+                    ]),
+                    new Email([
+                        'message' => 'Please enter a valid email address',
+                    ]),
+                ],
             ])
             ->add('name', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Name',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a name',
+                    ]),
                 ],
             ])
             ->add('address', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Address',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter an address',
+                    ]),
+                ],
             ])
             ->add('city', TextType::class, [
                 'attr' => [
                     'placeholder' => 'City',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a city',
+                    ]),
+                ],
             ])
             ->add('zipcode', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Zipcode',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a zipcode',
+                    ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
